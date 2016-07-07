@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+    <persistence-unit name="objects" transaction-type="JTA">
+        <jta-data-source>oracle_db</jta-data-source>
+        <class>com.nc.j2ee.TTAttributes</class>
+        <class>com.nc.j2ee.TTObject</class>
+        <class>com.nc.j2ee.TTObjectType</class>
+        <class>com.nc.j2ee.TTAttrObjectTypes</class>
+        <class>com.nc.j2ee.TTParams</class>
+        <class>com.nc.j2ee.TTReferences</class>
+    </persistence-unit>
+</persistence>
