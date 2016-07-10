@@ -23,11 +23,11 @@ import java.sql.Date;
  */
 public class RegistrationServlet extends HttpServlet implements javax.servlet.Servlet {
 
-    @EJB
+    @EJB(name = "ejb/object")
     /**Object EJB*/
     private TTObjectInterface objectI;
 
-    @EJB
+    @EJB(name = "ejb/params")
     /**Parameters EJB*/
     private TTParamsInterface paramsI;
 

@@ -17,7 +17,7 @@ import java.io.IOException;
  */
 public class DeleteServlet extends HttpServlet implements javax.servlet.Servlet {
 
-    @EJB
+    @EJB(name = "ejb/object")
     /**Object EJB*/
     TTObjectInterface object;
 

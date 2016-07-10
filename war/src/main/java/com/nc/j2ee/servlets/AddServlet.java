@@ -31,19 +31,19 @@ public class AddServlet extends HttpServlet implements javax.servlet.Servlet {
      */
     private static final Logger log = Logger.getLogger(AddServlet.class);
 
-    @EJB
+    @EJB(name = "ejb/object")
     /**Object EJB*/
     TTObjectInterface objectI;
 
-    @EJB
+    @EJB(name = "ejb/params")
     /**Parameters EJB*/
     TTParamsInterface paramsI;
 
-    @EJB
+    @EJB(name = "ejb/attributes")
     /**Attribute EJB*/
     TTAttributeInterface attributeI;
 
-    @EJB
+    @EJB(name = "ejb/attrObjectType")
     /**Attribute object type EJB*/
     TTAttrObjectTypeInterface attrObjectTypeI;
 

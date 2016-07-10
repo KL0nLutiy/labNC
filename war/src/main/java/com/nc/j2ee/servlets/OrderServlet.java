@@ -23,15 +23,15 @@ import java.sql.Date;
  */
 public class OrderServlet extends HttpServlet implements javax.servlet.Servlet {
 
-    @EJB
+    @EJB(name = "ejb/references")
     /**References EJB*/
     TTReferencesInterface references;
 
-    @EJB
+    @EJB(name = "ejb/object")
     /**Object EJB*/
     TTObjectInterface objectI;
 
-    @EJB
+    @EJB(name = "ejb/params")
     /**Parameters EJB*/
     TTParamsInterface params;
 

@@ -40,6 +40,7 @@
                         <webModule>
                             <groupId>test2</groupId>
                             <artifactId>war</artifactId>
+                            <contextRoot>/test2</contextRoot>
                         </webModule>
                         <ejbModule>
                             <groupId>test2</groupId>
@@ -51,7 +52,8 @@
         </plugins>
     </build>
 
-
-
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
 </project>

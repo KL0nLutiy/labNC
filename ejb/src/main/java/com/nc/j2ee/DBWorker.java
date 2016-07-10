@@ -2,6 +2,7 @@ package com.nc.j2ee;
 
 import org.apache.log4j.Logger;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
@@ -13,6 +14,7 @@ import java.util.*;
  * Class for select statement implementation
  * Created by Vlad on 04.07.2016.
  */
+
 public class DBWorker {
     /**
      * Entity manager to connect database with parsistance xml

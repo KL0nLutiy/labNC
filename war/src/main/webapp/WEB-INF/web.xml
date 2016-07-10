@@ -82,37 +82,37 @@
         <ejb-ref-name>ejb/attributes</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
         <local>com.nc.j2ee.interfaces.TTAttributeInterface</local>
-        <ejb-link>TTAttributesLocalSessionEJB</ejb-link>
+        <ejb-link>ejb-1.0-SNAPSHOT/TTAttributesLocalSessionEJB</ejb-link>
     </ejb-local-ref>
     <ejb-local-ref>
         <ejb-ref-name>ejb/object</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
         <local>com.nc.j2ee.interfaces.TTObjectInterface</local>
-        <ejb-link>TTObjectLocalSessionEJB</ejb-link>
+        <ejb-link>ejb-1.0-SNAPSHOT/TTObjectLocalSessionEJB</ejb-link>
     </ejb-local-ref>
     <ejb-local-ref>
         <ejb-ref-name>ejb/objectType</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
         <local>com.nc.j2ee.interfaces.TTObjectTypeInterface</local>
-        <ejb-link>TTObjectTypeLocalSessionEJB</ejb-link>
+        <ejb-link>ejb-1.0-SNAPSHOT/TTObjectTypeLocalSessionEJB</ejb-link>
     </ejb-local-ref>
     <ejb-local-ref>
         <ejb-ref-name>ejb/attrObjectType</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
         <local>com.nc.j2ee.interfaces.TTAttrObjectTypeInterface</local>
-        <ejb-link>TTAttrObjectTypesLocalSessionEJB</ejb-link>
+        <ejb-link>ejb-1.0-SNAPSHOT/TTAttrObjectTypesLocalSessionEJB</ejb-link>
     </ejb-local-ref>
     <ejb-local-ref>
         <ejb-ref-name>ejb/params</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
         <local>com.nc.j2ee.interfaces.TTParamsInterface</local>
-        <ejb-link>TTParamsLocalSessionEJB</ejb-link>
+        <ejb-link>ejb-1.0-SNAPSHOT/TTParamsLocalSessionEJB</ejb-link>
     </ejb-local-ref>
     <ejb-local-ref>
         <ejb-ref-name>ejb/references</ejb-ref-name>
         <ejb-ref-type>Session</ejb-ref-type>
         <local>com.nc.j2ee.interfaces.TTReferencesInterface</local>
-        <ejb-link>TTReferencesLocalSessionEJB</ejb-link>
+        <ejb-link>ejb-1.0-SNAPSHOT/TTReferencesLocalSessionEJB</ejb-link>
     </ejb-local-ref>
 
 </web-app>

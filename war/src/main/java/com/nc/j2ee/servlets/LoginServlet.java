@@ -20,7 +20,7 @@ import java.io.IOException;
  */
 public class LoginServlet extends HttpServlet implements javax.servlet.Servlet {
 
-    @EJB
+    @EJB(name = "ejb/attrObjectType")
     /**Attribute object type EJB*/
     private TTAttrObjectTypeInterface object;
 

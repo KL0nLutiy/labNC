@@ -24,21 +24,21 @@ import java.util.Map;
  */
 public class EditServlet extends HttpServlet implements javax.servlet.Servlet {
 
-    @EJB
+    @EJB(name = "ejb/object")
     /**Object EJB*/
-    TTObjectInterface objectI;
+            TTObjectInterface objectI;
 
-    @EJB
+    @EJB(name = "ejb/params")
     /**Parameters EJB*/
-    TTParamsInterface paramsI;
+            TTParamsInterface paramsI;
 
-    @EJB
+    @EJB(name = "ejb/attributes")
     /**Attribute EJB*/
-    TTAttributeInterface attributeI;
+            TTAttributeInterface attributeI;
 
-    @EJB
+    @EJB(name = "ejb/attrObjectType")
     /**Attribute object type EJB*/
-    TTAttrObjectTypeInterface attrObjectTypeI;
+            TTAttrObjectTypeInterface attrObjectTypeI;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
