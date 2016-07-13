@@ -1,7 +1,10 @@
-package com.nc.j2ee;
+package com.nc.j2ee.impl;
 
+import com.nc.j2ee.OrderInfo;
+import com.nc.j2ee.interfaces.DBWorkerInterface;
 import org.apache.log4j.Logger;
 
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -14,8 +17,9 @@ import java.util.*;
  * Class for select statement implementation
  * Created by Vlad on 04.07.2016.
  */
-
-public class DBWorker {
+@LocalBean
+@Stateless(name = "DBWorkerLocalSessionEJB")
+public class DBWorkerImpl implements DBWorkerInterface {
     /**
      * Entity manager to connect database with parsistance xml
      */
@@ -24,7 +28,7 @@ public class DBWorker {
     /**
      * Logger for logging info and errors
      */
-    private static final Logger log = Logger.getLogger(DBWorker.class);
+    private static final Logger log = Logger.getLogger(DBWorkerImpl.class);
 
     /**
      * Get database generated value from sequence
@@ -129,7 +133,12 @@ public class DBWorker {
         String goodsSelect;
 
         if(objectTypeId==0) {
-            goodsSelect =  "SELECT o.OBJECT_ID, a.NAME, CASE WHEN p.VALUE IS NULL THEN TO_CHAR(p.DATE_VALUE) ELSE p.VALUE END, o.NAME " +
+            goodsSelect =  "SELECT o.OBJECT_ID, a.NAME, " +
+                    "CASE " +
+                    "WHEN p.VALUE IS NOT NULL THEN p.VALUE " +
+                    "WHEN p.DATE_VALUE IS NOT NULL THEN TO_CHAR(p.DATE_VALUE) " +
+                    "END, " +
+                    "o.NAME " +
                     "FROM TT_OBJECTS o, TT_ATTRIBUTES a, TT_PARAMS p " +
                     "WHERE p.OBJECT_ID = o.OBJECT_ID AND a.ATTR_ID = ANY " +
                     "(SELECT ATTR_ID FROM TT_ATTR_OBJECT_TYPES WHERE OBJECT_TYPE_ID = o.OBJECT_TYPE_ID AND OBJECT_TYPE_ID <> 1 AND OBJECT_TYPE_ID <> 2 AND OBJECT_TYPE_ID <> 9) " +
@@ -160,7 +169,8 @@ public class DBWorker {
                 map.get(objectId).put("name",(String) record[3]);
             }
 
-            map.get(objectId).put((String) record[1],(String) record[2]);
+                map.get(objectId).put((String) record[1], (String) record[2]);
+
         });
 
         return map;

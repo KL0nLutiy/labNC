@@ -27,6 +27,15 @@
                 <version>2.6</version>
                 <configuration>
                     <packagingExcludes>WEB-INF/web.xml</packagingExcludes>
+                    <webResources>
+                        <resource>
+                            <filtering>true</filtering>
+                            <directory>src/main/webapp</directory>
+                            <includes>
+                                <include>WEB-INF/weblogic.xml</include>
+                            </includes>
+                        </resource>
+                    </webResources>
                 </configuration>
             </plugin>
         </plugins>

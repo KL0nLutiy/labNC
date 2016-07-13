@@ -1,8 +1,9 @@
 package com.nc.j2ee.servlets;
 
 
-import com.nc.j2ee.DBWorker;
+import com.nc.j2ee.impl.DBWorkerImpl;
 import com.nc.j2ee.Utils;
+import com.nc.j2ee.interfaces.DBWorkerInterface;
 import com.nc.j2ee.interfaces.TTAttrObjectTypeInterface;
 
 import javax.ejb.EJB;
@@ -24,14 +25,15 @@ public class LoginServlet extends HttpServlet implements javax.servlet.Servlet {
     /**Attribute object type EJB*/
     private TTAttrObjectTypeInterface object;
 
+    @EJB(name="ejb/dbWorker")
+    /**DBWorker*/
+    DBWorkerInterface dbWorkerI;
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        DBWorker dbWorker = new DBWorker();
-
         String username = Utils.toUTF8Request(request.getParameter("username"));
 
-        if(dbWorker.getObjectIdForValue(username)==null) {
+        if(dbWorkerI.getObjectIdForValue(username)==null) {
             request.getSession().setAttribute("result", "error1");
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
             rd.forward(request, response);
@@ -40,7 +42,7 @@ public class LoginServlet extends HttpServlet implements javax.servlet.Servlet {
 
         String password = Utils.md5Custom(Utils.toUTF8Request(request.getParameter("password")));
 
-        if(dbWorker.getPasswordForUsername(username)!=null && !dbWorker.getPasswordForUsername(username).equals(password)) {
+        if(dbWorkerI.getPasswordForUsername(username)!=null && !dbWorkerI.getPasswordForUsername(username).equals(password)) {
             request.getSession().setAttribute("result", "error2");
             RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
             rd.forward(request, response);
@@ -48,7 +50,7 @@ public class LoginServlet extends HttpServlet implements javax.servlet.Servlet {
         }
 
         Cookie loginCookie = new Cookie("user",username);
-        Cookie adminCookie = new Cookie("admin",""+dbWorker.isAdmin(username));
+        Cookie adminCookie = new Cookie("admin",""+dbWorkerI.isAdmin(username));
         loginCookie.setMaxAge(30*60);
         adminCookie.setMaxAge(30*60);
         response.addCookie(loginCookie);

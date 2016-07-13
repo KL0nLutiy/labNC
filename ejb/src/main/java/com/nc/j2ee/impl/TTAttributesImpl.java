@@ -1,6 +1,5 @@
 package com.nc.j2ee.impl;
 
-import com.nc.j2ee.DBWorker;
 import com.nc.j2ee.TTAttributes;
 import com.nc.j2ee.interfaces.TTAttributeInterface;
 import org.apache.log4j.Logger;
@@ -34,7 +33,7 @@ public class TTAttributesImpl implements TTAttributeInterface {
      * @return attribute id
      */
     public long create(TTAttributes attributes) {
-        DBWorker dbWorker = new DBWorker();
+        DBWorkerImpl dbWorker = new DBWorkerImpl();
         long id = dbWorker.getId();
         attributes.setAttrId(id);
         log.info("Create attribute "+attributes.toString());

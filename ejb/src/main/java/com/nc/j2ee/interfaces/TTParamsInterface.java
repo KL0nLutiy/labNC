@@ -16,17 +16,17 @@ public interface TTParamsInterface {
      * Create parameters
      * @param params - params object
      */
-    public void create(TTParams params);
+    void create(TTParams params);
 
     /**
      * Update parameters
      * @param params - params object
      */
-    public void update(TTParams params);
+    void update(TTParams params);
 
     /**
      * Delete parameters by id
      * @param id - embeded id(AttrObject.class)
      */
-    public void delete(AttrObject id);
+    void delete(AttrObject id);
 }

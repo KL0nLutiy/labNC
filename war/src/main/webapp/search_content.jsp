@@ -1,6 +1,9 @@
 <%@ page import="java.util.*" %>
-<%@ page import="com.nc.j2ee.DBWorker" %>
-<%@ page import="com.nc.j2ee.Utils" %><%--
+<%@ page import="com.nc.j2ee.Utils" %>
+<jsp:useBean id="dbWorkerI" scope="session" class="com.nc.j2ee.impl.DBWorkerImpl"/>
+<%@ page import="com.nc.j2ee.interfaces.DBWorkerInterface" %>
+<%@ page import="javax.naming.InitialContext" %>
+<%@ page import="javax.naming.Context" %><%--
   Created by IntelliJ IDEA.
   User: Vlad
   Date: 25.06.2016
@@ -26,31 +29,33 @@
 
                 String pageName = uri.substring(uri.lastIndexOf("/") + 1);
 
-                DBWorker dbWorker = new DBWorker();
+                /*DBWorkerInterface dbWorkerI;
+                Context context = new InitialContext();
+                dbWorkerI = (DBWorkerInterface) context.lookup("DBWorkerLocalSessionEJB/remote");*/
 
                 Map<Long, Map<String, String>> map = null;
 
                 switch (pageName) {
                     case "phones.jsp":
-                        map = dbWorker.getGoods(3L);
+                        map = dbWorkerI.getGoods(3L);
                         break;
                     case "headphones.jsp":
-                        map = dbWorker.getGoods(4L);
+                        map = dbWorkerI.getGoods(4L);
                         break;
                     case "usbcables.jsp":
-                        map = dbWorker.getGoods(5L);
+                        map = dbWorkerI.getGoods(5L);
                         break;
                     case "chargers.jsp":
-                        map = dbWorker.getGoods(6L);
+                        map = dbWorkerI.getGoods(6L);
                         break;
                     case "batteries.jsp":
-                        map = dbWorker.getGoods(7L);
+                        map = dbWorkerI.getGoods(7L);
                         break;
                     case "screensandsensors.jsp":
-                        map = dbWorker.getGoods(8L);
+                        map = dbWorkerI.getGoods(8L);
                         break;
                     default:
-                        map = dbWorker.getGoods(0L);
+                        map = dbWorkerI.getGoods(0L);
                 }
 
                 long objectId = 0L;
@@ -71,7 +76,7 @@
                 <div class="card large">
                     <%
                         objectId = pair.getKey();
-                        String url = "";
+                        String image = "";
                         String name = "";
                         String price = "";
                         String createdBy = "1";
@@ -84,7 +89,7 @@
                             //System.out.println(pair2.getKey()+" "+pair2.getValue());
                             switch (pair2.getKey()) {
                                 case "img_url":
-                                    url = pair2.getValue();
+                                    image = pair2.getValue();
                                     break;
                                 case "name":
                                     name = pair2.getValue();
@@ -116,7 +121,7 @@
 
                     %>
                     <div class="card-image">
-                        <img src="<%=url%>" width="380px" height="350px">
+                        <img src="<%=image%>" width="380px" height="350px">
                     </div>
                     <div class="card-content">
                         <h6><%=name%>
@@ -244,8 +249,8 @@
                     <br>
                     Create date: <%=createdTime%><br>
                     Change date: <%=changeTime%><br>
-                    Create by: <%=dbWorker.getAdminById(Long.parseLong(createdBy))%><br>
-                    Change by: <%=dbWorker.getAdminById(Long.parseLong(changeBy))%><br>
+                    Create by: <%=dbWorkerI.getAdminById(Long.parseLong(createdBy))%><br>
+                    Change by: <%=dbWorkerI.getAdminById(Long.parseLong(changeBy))%><br>
                 </div>
                 <div class="modal-footer">
                     <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">OK</a>

@@ -114,5 +114,11 @@
         <local>com.nc.j2ee.interfaces.TTReferencesInterface</local>
         <ejb-link>ejb-1.0-SNAPSHOT/TTReferencesLocalSessionEJB</ejb-link>
     </ejb-local-ref>
+    <ejb-local-ref>
+        <ejb-ref-name>ejb/dbWorker</ejb-ref-name>
+        <ejb-ref-type>Session</ejb-ref-type>
+        <local>com.nc.j2ee.interfaces.DBWorkerInterface</local>
+        <ejb-link>ejb-1.0-SNAPSHOT/DBWorkerLocalSessionEJB</ejb-link>
+    </ejb-local-ref>
 
 </web-app>

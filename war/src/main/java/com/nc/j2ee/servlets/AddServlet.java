@@ -3,10 +3,8 @@ package com.nc.j2ee.servlets;
 import com.nc.j2ee.*;
 import com.nc.j2ee.embeded.AttrObject;
 import com.nc.j2ee.embeded.AttrObjectType;
-import com.nc.j2ee.interfaces.TTAttrObjectTypeInterface;
-import com.nc.j2ee.interfaces.TTAttributeInterface;
-import com.nc.j2ee.interfaces.TTObjectInterface;
-import com.nc.j2ee.interfaces.TTParamsInterface;
+import com.nc.j2ee.impl.DBWorkerImpl;
+import com.nc.j2ee.interfaces.*;
 import org.apache.log4j.Logger;
 
 import javax.ejb.EJB;
@@ -25,6 +23,8 @@ import java.util.Map;
 
 @MultipartConfig
 public class AddServlet extends HttpServlet implements javax.servlet.Servlet {
+
+    public final static String imgPath = "C:\\image\\img\\";
 
     /**
      * Logger for logging info and errors
@@ -47,11 +47,14 @@ public class AddServlet extends HttpServlet implements javax.servlet.Servlet {
     /**Attribute object type EJB*/
     TTAttrObjectTypeInterface attrObjectTypeI;
 
+    @EJB(name="ejb/dbWorker")
+    /**DBWorker*/
+    DBWorkerInterface dbWorkerI;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String selectedType = Utils.toUTF8Request(request.getParameter("goodsType"));
-        DBWorker dbWorker = new DBWorker();
-        List<String> list = dbWorker.getAttrsForGoods(Long.parseLong(selectedType));
+        List<String> list = dbWorkerI.getAttrsForGoods(Long.parseLong(selectedType));
 
         request.getSession().setAttribute("list", list);
         request.getSession().setAttribute("goodsType", selectedType);
@@ -60,7 +63,6 @@ public class AddServlet extends HttpServlet implements javax.servlet.Servlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        DBWorker dbWorker = new DBWorker();
         Map<String, String[]> parameters = request.getParameterMap();
 
         Long objectTypeId = Long.parseLong(parameters.get("goodsType")[0]);
@@ -70,8 +72,6 @@ public class AddServlet extends HttpServlet implements javax.servlet.Servlet {
         object.setName(Utils.toUTF8Request(parameters.get("name")[0]));
         Long objectId = objectI.create(object);
 
-        String imgPath = getServletConfig().getServletContext().getRealPath("");
-
         Part filePart = request.getPart("file");
         InputStream fileContent = filePart.getInputStream();
         OutputStream outputStream = null;
@@ -79,7 +79,7 @@ public class AddServlet extends HttpServlet implements javax.servlet.Servlet {
         try {
 
             outputStream =
-                    new FileOutputStream(new File(imgPath+"\\img\\"+objectId+".jpg"));
+                    new FileOutputStream(new File(imgPath+objectId+".jpg"));
 
             int read = 0;
             byte[] bytes = new byte[1024];
@@ -110,10 +110,7 @@ public class AddServlet extends HttpServlet implements javax.servlet.Servlet {
 
             }
         }
-
-        paramsI.create(new TTParams(new AttrObject(40L,objectId),dbWorker.getAttrAccessType(40L),"img/"+objectId+".jpg"));
-
-
+        paramsI.create(new TTParams(new AttrObject(40L,objectId),dbWorkerI.getAttrAccessType(40L),"img/"+objectId+".jpg"));
 
         for(String parameter : parameters.keySet()) {
             if(parameter.equals("action") || parameter.equals("name") || parameter.equals("file") || parameter.equals("goodsType")) {
@@ -122,12 +119,12 @@ public class AddServlet extends HttpServlet implements javax.servlet.Servlet {
 
             Long attrId;
 
-            if((attrId=dbWorker.getAttrIdForName(parameter))!=0L) {
+            if((attrId=dbWorkerI.getAttrIdForName(parameter))!=0L) {
                 if(Utils.toUTF8Request(parameters.get(parameter)[0]).equals("")) {
                     continue;
                 }
                 AttrObject attrObject = new AttrObject(attrId,objectId);
-                paramsI.create(new TTParams(attrObject,dbWorker.getAttrAccessType(attrId),Utils.toUTF8Request(parameters.get(parameter)[0])));
+                paramsI.create(new TTParams(attrObject,dbWorkerI.getAttrAccessType(attrId),Utils.toUTF8Request(parameters.get(parameter)[0])));
             } else {
                 Long newAttrId = attributeI.create(new TTAttributes(parameter,0L));
 
@@ -150,10 +147,10 @@ public class AddServlet extends HttpServlet implements javax.servlet.Servlet {
             }
         }
 
-        paramsI.create(new TTParams(new AttrObject(36L,objectId),dbWorker.getAttrAccessType(36L),new Date(Utils.getCurrentTimeLong())));
-        paramsI.create(new TTParams(new AttrObject(37L,objectId),dbWorker.getAttrAccessType(37L),new Date(Utils.getCurrentTimeLong())));
-        paramsI.create(new TTParams(new AttrObject(38L,objectId),dbWorker.getAttrAccessType(38L),""+dbWorker.getObjectIdForValue(userName)));
-        paramsI.create(new TTParams(new AttrObject(39L,objectId),dbWorker.getAttrAccessType(39L),""+dbWorker.getObjectIdForValue(userName)));
+        paramsI.create(new TTParams(new AttrObject(36L,objectId),dbWorkerI.getAttrAccessType(36L),new Date(Utils.getCurrentTimeLong())));
+        paramsI.create(new TTParams(new AttrObject(37L,objectId),dbWorkerI.getAttrAccessType(37L),new Date(Utils.getCurrentTimeLong())));
+        paramsI.create(new TTParams(new AttrObject(38L,objectId),dbWorkerI.getAttrAccessType(38L),""+dbWorkerI.getObjectIdForValue(userName)));
+        paramsI.create(new TTParams(new AttrObject(39L,objectId),dbWorkerI.getAttrAccessType(39L),""+dbWorkerI.getObjectIdForValue(userName)));
         response.sendRedirect("index.jsp");
     }
 }

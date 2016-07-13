@@ -3,6 +3,8 @@ package com.nc.j2ee.servlets;
 import com.nc.j2ee.*;
 import com.nc.j2ee.embeded.AttrObject;
 import com.nc.j2ee.embeded.AttrObjectReference;
+import com.nc.j2ee.impl.DBWorkerImpl;
+import com.nc.j2ee.interfaces.DBWorkerInterface;
 import com.nc.j2ee.interfaces.TTObjectInterface;
 import com.nc.j2ee.interfaces.TTParamsInterface;
 import com.nc.j2ee.interfaces.TTReferencesInterface;
@@ -34,6 +36,10 @@ public class OrderServlet extends HttpServlet implements javax.servlet.Servlet {
     @EJB(name = "ejb/params")
     /**Parameters EJB*/
     TTParamsInterface params;
+
+    @EJB(name="ejb/dbWorker")
+    /**DBWorker*/
+    DBWorkerInterface dbWorkerI;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -93,17 +99,16 @@ public class OrderServlet extends HttpServlet implements javax.servlet.Servlet {
 
         Long orderObjectId = objectI.create(object);
 
-        DBWorker dbWorker = new DBWorker();
-        Long userObjectId = dbWorker.getObjectIdForValue(userName);
-        params.create(new TTParams(new AttrObject(32L,orderObjectId),dbWorker.getAttrAccessType(32L),""+orderId));
-        params.create(new TTParams(new AttrObject(33L,orderObjectId),dbWorker.getAttrAccessType(33L),""+address));
-        params.create(new TTParams(new AttrObject(34L,orderObjectId),dbWorker.getAttrAccessType(34L),""+comments));
-        params.create(new TTParams(new AttrObject(35L,orderObjectId),dbWorker.getAttrAccessType(35L),"12"));
-        params.create(new TTParams(new AttrObject(41L,orderObjectId),dbWorker.getAttrAccessType(41L),amount));
-        params.create(new TTParams(new AttrObject(36L,orderObjectId),dbWorker.getAttrAccessType(36L),new Date(Utils.getCurrentTimeLong())));
-        params.create(new TTParams(new AttrObject(37L,orderObjectId),dbWorker.getAttrAccessType(37L),new Date(Utils.getCurrentTimeLong())));
-        params.create(new TTParams(new AttrObject(38L,orderObjectId),dbWorker.getAttrAccessType(38L),""+userObjectId));
-        params.create(new TTParams(new AttrObject(39L,orderObjectId),dbWorker.getAttrAccessType(39L),""+userObjectId));
+        Long userObjectId = dbWorkerI.getObjectIdForValue(userName);
+        params.create(new TTParams(new AttrObject(32L,orderObjectId),dbWorkerI.getAttrAccessType(32L),""+orderId));
+        params.create(new TTParams(new AttrObject(33L,orderObjectId),dbWorkerI.getAttrAccessType(33L),""+address));
+        params.create(new TTParams(new AttrObject(34L,orderObjectId),dbWorkerI.getAttrAccessType(34L),""+comments));
+        params.create(new TTParams(new AttrObject(35L,orderObjectId),dbWorkerI.getAttrAccessType(35L),"12"));
+        params.create(new TTParams(new AttrObject(41L,orderObjectId),dbWorkerI.getAttrAccessType(41L),amount));
+        params.create(new TTParams(new AttrObject(36L,orderObjectId),dbWorkerI.getAttrAccessType(36L),new Date(Utils.getCurrentTimeLong())));
+        params.create(new TTParams(new AttrObject(37L,orderObjectId),dbWorkerI.getAttrAccessType(37L),new Date(Utils.getCurrentTimeLong())));
+        params.create(new TTParams(new AttrObject(38L,orderObjectId),dbWorkerI.getAttrAccessType(38L),""+userObjectId));
+        params.create(new TTParams(new AttrObject(39L,orderObjectId),dbWorkerI.getAttrAccessType(39L),""+userObjectId));
 
         AttrObjectReference attrObjectReference1 = new AttrObjectReference(32L,userObjectId,orderObjectId);
         references.create(new TTReferences(attrObjectReference1,1L));

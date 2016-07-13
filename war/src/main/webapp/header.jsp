@@ -1,6 +1,10 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.nc.j2ee.DBWorker" %>
-<%@ page import="com.nc.j2ee.OrderInfo" %><%--
+<%@ page import="com.nc.j2ee.OrderInfo" %>
+<%@ page import="com.nc.j2ee.interfaces.DBWorkerInterface" %>
+<%@ page import="javax.naming.InitialContext" %>
+<%@ page import="javax.naming.Context" %>
+<jsp:useBean id="dbWorkerI" scope="session" class="com.nc.j2ee.impl.DBWorkerImpl"/>
+<%--
   Created by IntelliJ IDEA.
   User: Vlad
   Date: 25.06.2016
@@ -13,6 +17,11 @@
         <a href="index.jsp" class="brand-logo">Online Shop</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
             <%
+                /*Context context = new InitialContext();
+                dbWorkerI = (DBWorkerInterface) context.lookup("ejb/dbWorker");
+
+                myBean*/
+
                 String userName = null;
                 boolean isAdmin = false;
                 Cookie[] cookies = request.getCookies();
@@ -65,8 +74,7 @@
         </thead>
         <tbody>
             <%
-                DBWorker dbWorker = new DBWorker();
-                List<OrderInfo> orderList = dbWorker.getOrderInfoForUser(userName);
+                List<OrderInfo> orderList = dbWorkerI.getOrderInfoForUser(userName);
                 for(OrderInfo info: orderList){
             %>
             <tr>

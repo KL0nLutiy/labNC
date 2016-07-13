@@ -1,4 +1,7 @@
-<%@ page import="com.nc.j2ee.DBWorker" %><%--
+<%@ page import="com.nc.j2ee.interfaces.DBWorkerInterface" %>
+<%@ page import="javax.naming.InitialContext" %>
+<%@ page import="javax.naming.Context" %>
+<jsp:useBean id="dbWorkerI" scope="session" class="com.nc.j2ee.impl.DBWorkerImpl"/><%--
   Created by IntelliJ IDEA.
   User: Vlad
   Date: 28.06.2016
@@ -49,14 +52,16 @@
             response.sendRedirect("index.jsp");
         }
 
-        DBWorker dbWorker = new DBWorker();
-        Long orderId = dbWorker.getId();
+        /*DBWorkerInterface dbWorkerI;
+        Context context = new InitialContext();
+        dbWorkerI = (DBWorkerInterface) context.lookup("DBWorkerLocalSessionEJB/remote");*/
+        Long orderId = dbWorkerI.getId();
 
         String name = (String) request.getSession().getAttribute("name");
         String price = (String) request.getSession().getAttribute("price");
         String productId = (String) request.getSession().getAttribute("productId");
 
-        String firstSecondname = dbWorker.getUsersName(userName);
+        String firstSecondname = dbWorkerI.getUsersName(userName);
 
         request.getSession().setAttribute("orderId",orderId);
     %>

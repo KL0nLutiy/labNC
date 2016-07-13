@@ -16,17 +16,17 @@ public interface TTAttrObjectTypeInterface {
      * Create attribute object type
      * @param attrObjectType - attribute object type object
      */
-    public void create(TTAttrObjectTypes attrObjectType);
+    void create(TTAttrObjectTypes attrObjectType);
 
     /**
      * Update attribute object type
      * @param attrObjectType - attribute object type object
      */
-    public void update(TTAttrObjectTypes attrObjectType);
+    void update(TTAttrObjectTypes attrObjectType);
 
     /**
      * Delete attribute object type by id
      * @param id - embeded id(AttrObjectType.class)
      */
-    public void delete(AttrObjectType id);
+    void delete(AttrObjectType id);
 }

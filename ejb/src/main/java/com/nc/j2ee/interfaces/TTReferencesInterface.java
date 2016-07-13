@@ -16,17 +16,17 @@ public interface TTReferencesInterface {
      * Create references
      * @param references - references object
      */
-    public void create(TTReferences references);
+    void create(TTReferences references);
 
     /**
      * Update references
      * @param references - references object
      */
-    public void update(TTReferences references);
+    void update(TTReferences references);
 
     /**
      * Delete references by id
      * @param id - embeded id(AttrObjectReference.class)
      */
-    public void delete(AttrObjectReference id);
+    void delete(AttrObjectReference id);
 }

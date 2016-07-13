@@ -16,17 +16,17 @@ public interface TTObjectInterface {
      * @param object - object object
      * @return object id
      */
-    public long create(TTObject object);
+    long create(TTObject object);
 
     /**
      * Update object
      * @param object - object object
      */
-    public void update(TTObject object);
+    void update(TTObject object);
 
     /**
      * Delete object by id
      * @param id - object id
      */
-    public void delete(long id);
+    void delete(long id);
 }

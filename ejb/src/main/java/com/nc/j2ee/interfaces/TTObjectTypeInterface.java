@@ -16,17 +16,17 @@ public interface TTObjectTypeInterface {
      * @param objectType - object type object
      * @return - object type id
      */
-    public long create(TTObjectType objectType);
+    long create(TTObjectType objectType);
 
     /**
      * Update object type
      * @param objectType - object type object
      */
-    public void update(TTObjectType objectType);
+    void update(TTObjectType objectType);
 
     /**
      * Delete object type by id
      * @param id - object id
      */
-    public void delete(long id);
+    void delete(long id);
 }

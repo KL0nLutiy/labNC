@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<weblogic-web-app xmlns="http://www.bea.com/ns/weblogic/90">
+    <virtual-directory-mapping>
+        <local-path>C:\image</local-path>
+        <url-pattern>*.jpg</url-pattern>
+        <url-pattern>img/*</url-pattern>
+    </virtual-directory-mapping>
+</weblogic-web-app>

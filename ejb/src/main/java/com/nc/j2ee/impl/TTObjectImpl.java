@@ -1,6 +1,5 @@
 package com.nc.j2ee.impl;
 
-import com.nc.j2ee.DBWorker;
 import com.nc.j2ee.TTObject;
 import com.nc.j2ee.interfaces.TTObjectInterface;
 import org.apache.log4j.Logger;
@@ -34,7 +33,7 @@ public class TTObjectImpl implements TTObjectInterface {
      * @return object id
      */
     public long create(TTObject object) {
-        DBWorker dbWorker = new DBWorker();
+        DBWorkerImpl dbWorker = new DBWorkerImpl();
         long id = dbWorker.getId();
         object.setObjectId(id);
         object.setObjectClassId(id);

@@ -1,10 +1,11 @@
 package com.nc.j2ee.servlets;
 
-import com.nc.j2ee.DBWorker;
+import com.nc.j2ee.impl.DBWorkerImpl;
 import com.nc.j2ee.TTObject;
 import com.nc.j2ee.TTParams;
 import com.nc.j2ee.Utils;
 import com.nc.j2ee.embeded.AttrObject;
+import com.nc.j2ee.interfaces.DBWorkerInterface;
 import com.nc.j2ee.interfaces.TTObjectInterface;
 import com.nc.j2ee.interfaces.TTParamsInterface;
 
@@ -31,20 +32,22 @@ public class RegistrationServlet extends HttpServlet implements javax.servlet.Se
     /**Parameters EJB*/
     private TTParamsInterface paramsI;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @EJB(name="ejb/dbWorker")
+    /**DBWorker*/
+    DBWorkerInterface dbWorkerI;
 
-            DBWorker dbWorker = new DBWorker();
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
             String username = Utils.toUTF8Request(request.getParameter("username"));
             String email = Utils.toUTF8Request(request.getParameter("email"));
 
             String errors = "";
 
-            if(!username.isEmpty() && dbWorker.getAttrIdForValue(username)!=null) {
+            if(!username.isEmpty() && dbWorkerI.getAttrIdForValue(username)!=null) {
                     errors+="error1";
             }
 
-            if(!email.isEmpty() && dbWorker.getAttrIdForValue(email)!=null){
+            if(!email.isEmpty() && dbWorkerI.getAttrIdForValue(email)!=null){
                     errors+="error2";
             }
 
@@ -63,19 +66,19 @@ public class RegistrationServlet extends HttpServlet implements javax.servlet.Se
             object.setName(username);
 
             long id = objectI.create(object);
-            long userId = dbWorker.getId();
+            long userId = dbWorkerI.getId();
 
-            paramsI.create(new TTParams(new AttrObject(7L,id),dbWorker.getAttrAccessType(7L),""+userId));
-            paramsI.create(new TTParams(new AttrObject(2L,id),dbWorker.getAttrAccessType(2L),username));
-            paramsI.create(new TTParams(new AttrObject(3L,id),dbWorker.getAttrAccessType(3L),Utils.md5Custom(request.getParameter("password"))));
-            paramsI.create(new TTParams(new AttrObject(4L,id),dbWorker.getAttrAccessType(4L),Utils.toUTF8Request(request.getParameter("firstname"))));
-            paramsI.create(new TTParams(new AttrObject(5L,id),dbWorker.getAttrAccessType(5L),Utils.toUTF8Request(request.getParameter("secondname"))));
-            paramsI.create(new TTParams(new AttrObject(6L,id),dbWorker.getAttrAccessType(6L),email));
-            paramsI.create(new TTParams(new AttrObject(8L,id),dbWorker.getAttrAccessType(8L),Utils.toUTF8Request(request.getParameter("phone"))));
-            paramsI.create(new TTParams(new AttrObject(36L,id),dbWorker.getAttrAccessType(36L),new Date(Utils.getCurrentTimeLong())));
-            paramsI.create(new TTParams(new AttrObject(37L,id),dbWorker.getAttrAccessType(37L),new Date(Utils.getCurrentTimeLong())));
-            paramsI.create(new TTParams(new AttrObject(38L,id),dbWorker.getAttrAccessType(38L),""+userId));
-            paramsI.create(new TTParams(new AttrObject(39L,id),dbWorker.getAttrAccessType(39L),""+userId));
+            paramsI.create(new TTParams(new AttrObject(7L,id),dbWorkerI.getAttrAccessType(7L),""+userId));
+            paramsI.create(new TTParams(new AttrObject(2L,id),dbWorkerI.getAttrAccessType(2L),username));
+            paramsI.create(new TTParams(new AttrObject(3L,id),dbWorkerI.getAttrAccessType(3L),Utils.md5Custom(request.getParameter("password"))));
+            paramsI.create(new TTParams(new AttrObject(4L,id),dbWorkerI.getAttrAccessType(4L),Utils.toUTF8Request(request.getParameter("firstname"))));
+            paramsI.create(new TTParams(new AttrObject(5L,id),dbWorkerI.getAttrAccessType(5L),Utils.toUTF8Request(request.getParameter("secondname"))));
+            paramsI.create(new TTParams(new AttrObject(6L,id),dbWorkerI.getAttrAccessType(6L),email));
+            paramsI.create(new TTParams(new AttrObject(8L,id),dbWorkerI.getAttrAccessType(8L),Utils.toUTF8Request(request.getParameter("phone"))));
+            paramsI.create(new TTParams(new AttrObject(36L,id),dbWorkerI.getAttrAccessType(36L),new Date(Utils.getCurrentTimeLong())));
+            paramsI.create(new TTParams(new AttrObject(37L,id),dbWorkerI.getAttrAccessType(37L),new Date(Utils.getCurrentTimeLong())));
+            paramsI.create(new TTParams(new AttrObject(38L,id),dbWorkerI.getAttrAccessType(38L),""+userId));
+            paramsI.create(new TTParams(new AttrObject(39L,id),dbWorkerI.getAttrAccessType(39L),""+userId));
 
             request.getSession().setAttribute("result", "Registration successful");
             RequestDispatcher rd = request.getRequestDispatcher("registration.jsp");
