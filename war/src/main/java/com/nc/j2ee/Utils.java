@@ -34,7 +34,7 @@ public class Utils {
             messageDigest.update(toUTF8Request(st).getBytes());
             digest = messageDigest.digest();
         } catch (NoSuchAlgorithmException e) {
-            log.error("Cannot create md5 hex"+e.getMessage());
+            log.error("Cannot create md5 hex"+e.getMessage(), e);
             e.printStackTrace();
         }
 

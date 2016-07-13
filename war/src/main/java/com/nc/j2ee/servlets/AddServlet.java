@@ -92,7 +92,7 @@ public class AddServlet extends HttpServlet implements javax.servlet.Servlet {
 
         } catch (IOException e) {
             e.printStackTrace();
-            log.error("Can't add img for object id: "+objectId+" "+e.getMessage());
+            log.error("Can't add img for object id: "+objectId+" "+e.getMessage(), e);
         } finally {
             if (fileContent != null) {
                 try {

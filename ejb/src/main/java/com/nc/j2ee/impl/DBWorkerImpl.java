@@ -42,7 +42,7 @@ public class DBWorkerImpl implements DBWorkerInterface {
         } catch(NoResultException e) {
             return null;
         } catch (Exception e) {
-            log.error("DataBase driver problem: "+e.getMessage());
+            log.error("DataBase driver problem: "+e.getMessage(), e);
             return null;
         }
     }
@@ -61,7 +61,7 @@ public class DBWorkerImpl implements DBWorkerInterface {
         } catch(NoResultException e) {
             return null;
         } catch (Exception e) {
-            log.error("DataBase driver problem: "+e.getMessage());
+            log.error("DataBase driver problem: "+e.getMessage(), e);
             return null;
         }
     }
@@ -80,7 +80,7 @@ public class DBWorkerImpl implements DBWorkerInterface {
         } catch(NoResultException e) {
             return null;
         } catch (Exception e) {
-            log.error("DataBase driver problem: "+e.getMessage());
+            log.error("DataBase driver problem: "+e.getMessage(), e);
             return null;
         }
     }
@@ -99,7 +99,7 @@ public class DBWorkerImpl implements DBWorkerInterface {
         } catch(NoResultException e) {
             return null;
         } catch (Exception e) {
-            log.error("DataBase driver problem: "+e.getMessage());
+            log.error("DataBase driver problem: "+e.getMessage(), e);
             return null;
         }
     }
@@ -118,7 +118,7 @@ public class DBWorkerImpl implements DBWorkerInterface {
         } catch(NoResultException e) {
             return false;
         } catch (Exception e) {
-            log.error("DataBase driver problem: "+e.getMessage());
+            log.error("DataBase driver problem: "+e.getMessage(), e);
             return false;
         }
     }
@@ -177,7 +177,7 @@ public class DBWorkerImpl implements DBWorkerInterface {
         } catch(NoResultException e) {
             return null;
         } catch (Exception e) {
-            log.error("DataBase driver problem: "+e.getMessage());
+            log.error("DataBase driver problem: "+e.getMessage(), e);
             return null;
         }
     }
@@ -196,7 +196,7 @@ public class DBWorkerImpl implements DBWorkerInterface {
         } catch(NoResultException e) {
             return null;
         } catch (Exception e) {
-            log.error("DataBase driver problem: "+e.getMessage());
+            log.error("DataBase driver problem: "+e.getMessage(), e);
             return null;
         }
     }
@@ -216,7 +216,7 @@ public class DBWorkerImpl implements DBWorkerInterface {
         } catch(NoResultException e) {
             return null;
         } catch (Exception e) {
-            log.error("DataBase driver problem: "+e.getMessage());
+            log.error("DataBase driver problem: "+e.getMessage(), e);
             return null;
         }
     }
@@ -235,7 +235,7 @@ public class DBWorkerImpl implements DBWorkerInterface {
         } catch(NoResultException e) {
             return null;
         } catch (Exception e) {
-            log.error("DataBase driver problem: "+e.getMessage());
+            log.error("DataBase driver problem: "+e.getMessage(), e);
             return null;
         }
     }
@@ -277,7 +277,7 @@ public class DBWorkerImpl implements DBWorkerInterface {
         } catch(NoResultException e) {
             return null;
         } catch (Exception e) {
-            log.error("DataBase driver problem: "+e.getMessage());
+            log.error("DataBase driver problem: "+e.getMessage(), e);
             return null;
         }
     }
@@ -296,7 +296,7 @@ public class DBWorkerImpl implements DBWorkerInterface {
         } catch(NoResultException e) {
             return null;
         } catch (Exception e) {
-            log.error("DataBase driver problem: "+e.getMessage());
+            log.error("DataBase driver problem: "+e.getMessage(), e);
             return null;
         }
     }
@@ -315,7 +315,7 @@ public class DBWorkerImpl implements DBWorkerInterface {
         } catch(NoResultException e) {
             return null;
         } catch (Exception e) {
-            log.error("DataBase driver problem: "+e.getMessage());
+            log.error("DataBase driver problem: "+e.getMessage(), e);
             return null;
         }
     }
@@ -334,7 +334,7 @@ public class DBWorkerImpl implements DBWorkerInterface {
         } catch(NoResultException e) {
             return null;
         } catch (Exception e) {
-            log.error("DataBase driver problem: "+e.getMessage());
+            log.error("DataBase driver problem: "+e.getMessage(), e);
             return null;
         }
     }
@@ -358,7 +358,7 @@ public class DBWorkerImpl implements DBWorkerInterface {
         } catch(NoResultException e) {
             return null;
         } catch (Exception e) {
-            log.error("DataBase driver problem: "+e.getMessage());
+            log.error("DataBase driver problem: "+e.getMessage(), e);
             return null;
         }
     }
